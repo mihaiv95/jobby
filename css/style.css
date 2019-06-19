@@ -1,0 +1,18 @@
+.my-list {
+    list-style-type: none;
+}
+
+.footer-link{
+    color: white;
+    text-decoration: none;
+}
+.footer-link:hover{
+    color: orange;
+    text-decoration: none;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
+
