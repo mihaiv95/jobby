@@ -29,19 +29,18 @@ function printJobs($jobs){
     $colors = [0 => 'bg-success', 1=>'bg-primary', 2=>'bg-danger'];
     do{
         $job = $jobs[$ind];
-
+        $id = $job['job'];
         $jType = getJobType($job['job'])[0];
         $jName = $jType['name'];
         $difficulty = $jType['difficulty'];
-        echo "<a href=\"#\" class=\"list-group-item list-group-item-action text-light ".$colors[$difficulty]."\">$jName</a>";
+        echo "<a href=\"\" value='$id' onclick=\"moreInfo(this.getAttribute('value')); return false;\" class=\"list-group-item list-group-item-action text-light ".$colors[$difficulty]."\">$jName</a>";
         $ind++;
     }while($ind % 5 != 0 and $ind < count($jobs));
 }
 
 function getMoreInfo($jobId){
     $jobs = getJobs();
-    $counter = count($jobs);
-
+    
 
 }
 

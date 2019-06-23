@@ -16,6 +16,7 @@ if (isset($_GET['logout'])){
         <title>Dashboard</title>
         <link rel="stylesheet" type="text/css" href="./bootstrap-4.3.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <script src="js/jobs.js"></script>
     </head>
     </body>
 
@@ -57,8 +58,8 @@ if (isset($_GET['logout'])){
                 </div>
             </div>
         </div>
-        <div class="col-4">
-            hello
+        <div class="col-4" id="info">
+
         </div>
     </div>
         <div class="container-fluid">
