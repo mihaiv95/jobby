@@ -14,4 +14,3 @@ function moreInfo(str){
     xmlhttp.open("GET", "jobinfo.php?q="+str, true);
     xmlhttp.send();
 }
-

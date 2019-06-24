@@ -39,9 +39,17 @@ function printJobs($jobs){
 }
 
 function getMoreInfo($jobId){
-    $jobs = getJobs();
-    
-
+    $db = openCon();
+    $query = $db->prepare("SELECT * FROM job WHERE job.job = $jobId;");
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+    $bossId = $results[0]["fk_id_employer"];
+    echo $bossId;
+    $query = $db->prepare("SELECT * FROM user WHERE user.user = :bossid");
+    $query->execute(array(':bossid' => $bossId));
+    $res = $query->fetchAll(PDO::FETCH_ASSOC);
+    $r = $res[0]['user'];
+    return $r;
 }
 
 
