@@ -44,11 +44,13 @@ function getMoreInfo($jobId){
     $query->execute();
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
     $bossId = $results[0]["fk_id_employer"];
-    echo $bossId;
     $query = $db->prepare("SELECT * FROM user WHERE user.user = :bossid");
     $query->execute(array(':bossid' => $bossId));
     $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    $r = $res[0]['user'];
+    $query = $db->prepare("SELECT * FROM user_profile WHERE user_profile = :userId");
+    $query->execute(array(':userId' => $res[0]['fk_profile']));
+    $res2 = $query->fetchAll(PDO::FETCH_ASSOC);
+    $r = array("bossName" => $res2[0]['last_name'] ." ". $res2[0]['first_name'],"bossImg" => $res[0]['image_ref'], "jobDesc" => $results[0]['description']);
     return $r;
 }
 

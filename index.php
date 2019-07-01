@@ -11,14 +11,15 @@ if (isset($_GET['logout'])){
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html class="h-100">
     <head>
         <title>Dashboard</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" href="./bootstrap-4.3.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
         <script src="js/jobs.js"></script>
     </head>
-    </body>
+    <body class="h-100">
 
         <?php if (isset($_SESSION['success'])) : ?>
             <h3>
@@ -27,8 +28,8 @@ if (isset($_GET['logout'])){
                 ?>
             </h3>
         <?php endif ?>
-    <div class="row align-items-center justify-content-around">
-        <div class="col-4">
+    <div class="row align-items-center justify-content-around content-wrapper">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class="list-group text-center">
                 <div class="container-fluid list-group-item">
                         <?php echo "Conectat ca: " . $_SESSION['username'] . "</p><p><img class=\"img-fluid\" src=" . $_SESSION['image'] . "></p>";
@@ -42,7 +43,7 @@ if (isset($_GET['logout'])){
                 <a href="index.php?logout='1'" class="list-group-item list-group-item-action font-weight-bold text-danger">Logout</a>
             </div>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class="container-fluid">
                 <div class="row justify-content-between">
                     <?php
@@ -58,38 +59,38 @@ if (isset($_GET['logout'])){
                 </div>
             </div>
         </div>
-        <div class="col-4" id="info">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12" id="info">
 
         </div>
     </div>
-        <div class="container-fluid">
+    <div class="container-fluid footer px-0">
 
-            <footer class="page-footer font-small blue fixed-bottom bg-primary">
-                <div class="row text-light">
+        <footer class="page-footer font-small blue bg-primary">
+            <div class="row text-light justify-content-around">
 
-                    <!-- Copyright -->
-                    <div class="col-lg-3 col-md-4 col-sm-6 footer-copyright text-left py-3">© 2018 Copyright:
-                        <a class="footer-link" href="https://mdbootstrap.com/education/bootstrap/"> Jobby SRL</a>
-                    </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 pr-0 ml-auto pr-5 py-3">
-                        <ul class="my-list">
-                            <li>
-                                Contact: 555-012-4675
-                            </li>
-                            <li>
-                                Email:
-                                <a class="footer-link" href="">dummy_mail@dummy.com</a>
-                            </li>
-                            <li>
-                                <a class="footer-link" href="">Facebook</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Copyright -->
+                <!-- Copyright -->
+                <div class="col-lg-3 col-md-4 col-sm-6 footer-copyright text-left pl-5 py-3">© 2018 Copyright:
+                    <a class="footer-link" href="">Jobby SRL</a>
                 </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 ml-auto pr-lg-5 py-3">
+                    <ul class="my-list">
+                        <li>
+                            Contact: 555-012-4675
+                        </li>
+                        <li>
+                            Email:
+                            <a class="footer-link" href="">dummy_mail@dummy.com</a>
+                        </li>
+                        <li>
+                            <a class="footer-link" href="">Facebook</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Copyright -->
+            </div>
 
-            </footer>
-        </div>
+        </footer>
+    </div>
 
     </body>
 </html>

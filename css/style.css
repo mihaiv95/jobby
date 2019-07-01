@@ -2,6 +2,16 @@
     list-style-type: none;
 }
 
+.content-wrapper{
+    min-height: 100%;
+    margin-bottom: -60px;
+    padding-bottom: 60px;
+}
+
+.footer{
+    height: 60px;
+}
+
 .footer-link{
     color: white;
     text-decoration: none;
