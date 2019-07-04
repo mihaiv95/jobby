@@ -1,5 +1,6 @@
 <?php
 require 'dbconn.php';
+include 'utils.php';
 $db = openCon();
 $errors = array();
 // Registration
@@ -33,31 +34,27 @@ if (isset($_POST['reg_user'])) {
     $user_check_query = $db->prepare("SELECT * FROM user WHERE nickname=? OR email=? LIMIT 1;");
     $user_check_query->execute(array($username,$email));
     $result = $user_check_query->fetchAll(PDO::FETCH_ASSOC);
-    $row = $result[0];
-    if (count($row)>0){
-        if ($row['nickname'] == $username){
-            array_push($errors, "Utilizatorul cu acest nume este deja in baza de date.");
-        }
-        if ($row['email'] == $email){
-            array_push($errors, "Adresa de email exista deja in baza de date.");
+    if(count($result) > 0){
+        $row = $result[0];
+        if (count($row)>0) {
+            if ($row['nickname'] == $username) {
+                array_push($errors, "Utilizatorul cu acest nume este deja in baza de date.");
+            }
+            if ($row['email'] == $email) {
+                array_push($errors, "Adresa de email exista deja in baza de date.");
+            }
         }
     }   
     if (count($errors) == 0){
-        $query = $db->prepare("INSERT INTO user_profile () VALUES ();");
+        $query = $db->prepare("CALL AddUser(?, ?, ?, ?, ?);");
         $err_flag = false;
-        if ($query->execute()){
-            $query_2 = $db->prepare("INSERT INTO user (nickname, passw, first_name, last_name, email, fk_profile) 
-                                                    VALUES (?,?,?,?,?,?);");
-            $profile_id = $db->lastInsertId();
-            if(!$query_2->execute(array($username, $passw_1, $first_name, $last_name, $email, $profile_id))) $err_flag = true;
-        }else{$err_flag = true;}
-        if ($err_flag){
+
+        if (!$query->execute(array($username, $passw_2, $email, $first_name, $last_name))){
             array_push($errors, "Eroare la introducerea utilizatorului!!");
         }else{
             session_start();
             $_SESSION['username'] = $username;
             $_SESSION['counter'] = 0;
-            $_SESSION['success'] = "Sunteti conectat!";
             header('location: index.php');
         }
 
@@ -84,7 +81,7 @@ if (isset($_POST['login_user'])){
             $_SESSION['username'] = $username;
             $_SESSION['counter'] = 0;
             $_SESSION['success'] = "Sunteti conectat!";
-            $_SESSION['image'] = $results[0]['image_ref'];
+            $_SESSION['image'] = wp_normalize_path($results[0]['image_ref']);
             header('Location: index.php');
         }else{
             array_push($errors, "Parola sau nume utilizator invalid!!");

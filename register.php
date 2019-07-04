@@ -9,11 +9,22 @@
     </head>
     <body class="h-100">
     <div class="content-wrapper">
-        <div class="row align-items-center justify-content-center content-wrapper">
+        <header>
+            <nav class="navbar bg-primary">
+<!--                <form class="form-inline ml-auto">-->
+<!--                    <input class="form-control" type="search" placeholder="Cauta" aria-label="Search">-->
+<!--                    <button class="btn text-light btn-outline-warning" type="submit">Cauta</button>-->
+<!--                </form>-->
+                <a class="btn btn-lg btn-outline-warning" href="login.php">Inapoi la Login</a>
+
+            </nav>
+        </header>
+
+    <div class="container-fluid">
+        <div class="row justify-content-center">
             <div class="col-6">
                 <h1>Inregistrare</h1>
                 <form method="post" action="register.php">
-                    <?php include 'errors.php';?>
                     <div class="form-group">
                         <label>Nume utilizator</label>
                         <input type="text" class="form-control" name="username">
@@ -41,36 +52,36 @@
                     <div>
                         <button type="submit" class="btn btn-primary" name="reg_user">Inregistreaza-te!</button>
                     </div>
+                    <?php include 'errors.php';?>
                 </form>
             </div>
         </div>
     </div>
+    </div>
+
     <div class="container-fluid footer">
-<!--        <footer class="">-->
-            <div class="row text-light justify-content-around page-footer font-small blue bg-primary">
+        <div class="row text-light page-footer font-small blue bg-primary align-items-center justify-content-between">
 
-                <!-- Copyright -->
-                <div class="col-lg-3 col-md-4 col-sm-6 footer-copyright text-left pl-5 py-3">© 2018 Copyright:
-                    <a class="footer-link" href="">Jobby SRL</a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-sm-6 ml-auto pr-5 py-3">
-                    <ul class="my-list">
-                        <li>
-                            Contact: 555-012-4675
-                        </li>
-                        <li>
-                            Email:
-                            <a class="footer-link" href="">dummy_mail@dummy.com</a>
-                        </li>
-                        <li>
-                            <a class="footer-link" href="">Facebook</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- Copyright -->
+            <!-- Copyright -->
+            <div class="col-lg-3 col-md-4 col-sm-6 footer-copyright text-left px-3 mx-0">© 2018 Copyright:
+                <a class="footer-link" href="">Jobby SRL</a>
             </div>
-
-<!--        </footer>-->
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <ul class="my-list">
+                    <li>
+                        Contact: 555-012-4675
+                    </li>
+                    <li>
+                        Email:
+                        <a class="footer-link" href="">dummy_mail@dummy.com</a>
+                    </li>
+                    <li>
+                        <a class="footer-link" href="">Facebook</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Copyright -->
+        </div>
     </div>
     </body>
 </html>

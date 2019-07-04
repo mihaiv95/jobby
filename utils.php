@@ -1,9 +1,8 @@
 <?php
-include 'server.php';
+require_once 'dbconn.php';
 function getJobs()
 {
     $db = openCon();
-
     $query = $db->prepare("SELECT * FROM job;");
     $query->execute();
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -18,6 +17,15 @@ function getJobType($id){
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
     return $results;
 }
+
+function getTypes(){
+    $db = openCon();
+    $query = $db->prepare("SELECT name FROM job_type;");
+    $query->execute();
+    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $results;
+}
+
 
 function printJobs($jobs){
 //    foreach($jobs as $ind => $job){
@@ -50,8 +58,12 @@ function getMoreInfo($jobId){
     $query = $db->prepare("SELECT * FROM user_profile WHERE user_profile = :userId");
     $query->execute(array(':userId' => $res[0]['fk_profile']));
     $res2 = $query->fetchAll(PDO::FETCH_ASSOC);
-    $r = array("bossName" => $res2[0]['last_name'] ." ". $res2[0]['first_name'],"bossImg" => $res[0]['image_ref'], "jobDesc" => $results[0]['description']);
+    $r = array("bossName" => $res2[0]['last_name'] ." ". $res2[0]['first_name'],"bossImg" => wp_normalize_path($res[0]['image_ref']), "jobDesc" => $results[0]['description'], "accAge");
     return $r;
 }
 
+function wp_normalize_path( $path ) {
+    $path = str_replace( '/', '\\', $path );
+    return $path;
+}
 

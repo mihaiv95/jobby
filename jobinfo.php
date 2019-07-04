@@ -12,5 +12,6 @@ if ($q != ""){
                 <div class='list-group-item'>
                    " . $r['jobDesc'] . "
                 </div>
+           
             </div>";
 }
