@@ -1,12 +1,8 @@
 <?php
 session_start();
+include 'server.php';
 
 if (!isset($_SESSION['username'])) {
-    header('location: login.php');
-}
-if (isset($_GET['logout'])){
-    session_destroy();
-    unset($_SESSION['username']);
     header('location: login.php');
 }
 ?>
@@ -18,6 +14,7 @@ if (isset($_GET['logout'])){
         <link rel="stylesheet" type="text/css" href="./bootstrap-4.3.1-dist/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="./css/style.css">
         <script src="js/jobs.js"></script>
+        <script src="js/addjob.js"></script>
     </head>
 
     <body class="h-100">
@@ -28,16 +25,16 @@ if (isset($_GET['logout'])){
                     <a class="btn btn-lg btn-outline-warning" href="index.php">Acasa</a>
                 </nav>
             </header>
-            <div class="container-fluid">
+            <div class="container-fluid mb-2">
                 <div class="row justify-content-center">
                     <div class="col-6">
-                        <h1>Adauga job</h1>
-                        <form method="post" action="register.php">
+                        <h1>Adauga anunt</h1>
+                        <form method="post" action="addjob.php">
                             <div class="form-group">
                                 <label>Categorie</label>
                                 <select class="form-control" name="type">
                                     <option selected>Alege o categorie</option>
-                                    <?php include 'server.php';
+                                    <?php
                                     $array = getTypes();?>
                                     <?php foreach($array as $key => $elem): ?>
                                     <option>
@@ -53,11 +50,11 @@ if (isset($_GET['logout'])){
                             </div>
                             <div class="form-group">
                                 <label>Data expirare</label>
-                                <input type="date" class="form-control" name="expdate">
+                                <input type="date" class="form-control" name="expdate" min="">
                             </div>
 
                             <div>
-                                <button type="submit" class="btn btn-primary" name="reg_user">Inregistreaza-te!</button>
+                                <button type="submit" class="btn btn-primary" name="add_job">Adauga</button>
                             </div>
                             <?php include 'errors.php';?>
                         </form>

@@ -26,6 +26,32 @@ function getTypes(){
     return $results;
 }
 
+function getTypeId($db, $type){
+    $query = $db->prepare("SELECT job_type FROM job_type WHERE name = :type;");
+    $query->execute([':type' => $type]);
+    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $results[0];
+}
+
+
+function getUserByName($db, $username){
+    $query = $db->prepare("SELECT * FROM user WHERE nickname=?");
+    $query->execute(array($username));
+    $results = $query->fetchAll(PDO::FETCH_ASSOC);
+    return $results[0];
+}
+
+function addJob($db, $username, $type, $desc, $expdate){
+    $boss = getUserByName($db,$username);
+    $type_id = getTypeId($db, $type);
+    $query = $db->prepare("INSERT INTO job (fk_id_employer,fk_type,exp_date,description) VALUES (?,?,?,?)");
+    if (!$query->execute(array($boss['user'],$type_id['job_type'],$expdate,$desc))){
+        return false;
+    }
+    return true;
+
+}
+
 
 function printJobs($jobs){
 //    foreach($jobs as $ind => $job){

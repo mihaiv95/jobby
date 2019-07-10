@@ -89,3 +89,27 @@ if (isset($_POST['login_user'])){
     }
 
 }
+
+//add job
+if (isset($_POST['add_job'])){
+    $desc = $_POST['description'];
+    $type = $_POST['type'];
+    $expdate = $_POST['expdate'];
+    if ($type == 'Alege o categorie') {
+        array_push($errors, "Alege o categorie !!!");
+    }
+    if (empty($desc)){
+        array_push($errors, 'Adauga o descriere !!!');
+    }
+    if (empty($expdate)){
+        array_push($errors, 'Adauga data expirarii !!!');
+    }
+    if (count($errors) == 0){
+        if (addJob($db, $_SESSION['username'], $type, $desc, $expdate)){
+            echo "GGGGG";
+        }else{
+            array_push($errors, "Eroare la adaugare !!!");
+        }
+
+    }
+}
