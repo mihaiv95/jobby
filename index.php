@@ -7,6 +7,7 @@ if (!isset($_SESSION['username'])) {
 if (isset($_GET['logout'])){
     session_destroy();
     unset($_SESSION['username']);
+    unset($_SESSION['counter']);
     header('location: login.php');
 }
 ?>
@@ -53,14 +54,14 @@ if (isset($_GET['logout'])){
                             <div class="row justify-content-between">
                                 <?php
                                     include 'utils.php';
-                                    printJobs(getJobs());
+                                    printJobs();
                                 ?>
-                                <button type="button" class="btn btn-primary btn-lg">
-                                    Prev
-                                </button>
-                                <button type="button" class="btn btn-primary btn-lg">
-                                    Next
-                                </button>
+                                <a href="counterPrev.php" type="button" class="btn btn-primary btn-lg">
+                                    Inapoi
+                                </a>
+                                <a href="counterNext.php" type="button" class="btn btn-primary btn-lg">
+                                    Inainte
+                                </a>
                             </div>
                         </div>
                     </div>

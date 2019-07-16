@@ -1,17 +1,26 @@
 <?php
 require_once 'dbconn.php';
-function getJobs()
+function getJobs($limit, $offset)
 {
     $db = openCon();
-    $query = $db->prepare("SELECT * FROM job;");
-    $query->execute();
-    $results = $query->fetchAll(PDO::FETCH_ASSOC);
-    return $results;
+    if ($limit == null && $offset == null){
+        $query = $db->prepare("SELECT * FROM job;");
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }else{
+        $query = $db->prepare("SELECT * FROM job LIMIT :limit OFFSET :offset ;");
+        $query->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $query->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $query->execute();
+        $results = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
+    }
+
 }
 
 function getJobType($id){
     $db = openCon();
-
     $query = $db->prepare("SELECT * FROM job_type WHERE job_type = :id;");
     $query->execute([':id' => $id]);
     $results = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -53,23 +62,20 @@ function addJob($db, $username, $type, $desc, $expdate){
 }
 
 
-function printJobs($jobs){
+function printJobs(){
 //    foreach($jobs as $ind => $job){
 //        foreach($job as $key => $val)
 //        echo "<p>Key: " . $key . ", Val: " . $val . "</p>";
-    $jobs = getJobs();
 //    <a href="#" class="list-group-item list-group-item-action">Help</a>
-    $ind = $_SESSION['counter'];
-    $colors = [0 => 'bg-success', 1=>'bg-primary', 2=>'bg-danger'];
-    do{
-        $job = $jobs[$ind];
+    $colors = [1 => 'bg-success', 2=>'bg-primary', 3=>'bg-danger'];
+    $jobs = getJobs(2, $_SESSION['counter']);
+    foreach ($jobs as $job) {
         $id = $job['job'];
         $jType = getJobType($job['job'])[0];
         $jName = $jType['name'];
         $difficulty = $jType['difficulty'];
-        echo "<a href=\"\" value='$id' onclick=\"moreInfo(this.getAttribute('value')); return false;\" class=\"list-group-item list-group-item-action text-light ".$colors[$difficulty]."\">$jName</a>";
-        $ind++;
-    }while($ind % 5 != 0 and $ind < count($jobs));
+        echo "<a href=\"\" value='$id' onclick=\"moreInfo(this.getAttribute('value')); return false;\" class=\"list-group-item list-group-item-action text-light " . $colors[$difficulty] . "\">$jName</a>";
+    }
 }
 
 function getMoreInfo($jobId){
