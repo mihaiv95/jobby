@@ -56,10 +56,10 @@ if (isset($_GET['logout'])){
                                     include 'utils.php';
                                     printJobs();
                                 ?>
-                                <a href="counterPrev.php" type="button" class="btn btn-primary btn-lg">
+                                <a href="counterPrev.php" type="button" id="prev" class="btn btn-primary btn-lg">
                                     Inapoi
                                 </a>
-                                <a href="counterNext.php" type="button" class="btn btn-primary btn-lg">
+                                <a href="counterNext.php" type="button" id="next" class="btn btn-primary btn-lg">
                                     Inainte
                                 </a>
                             </div>

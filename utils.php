@@ -68,7 +68,7 @@ function printJobs(){
 //        echo "<p>Key: " . $key . ", Val: " . $val . "</p>";
 //    <a href="#" class="list-group-item list-group-item-action">Help</a>
     $colors = [1 => 'bg-success', 2=>'bg-primary', 3=>'bg-danger'];
-    $jobs = getJobs(2, $_SESSION['counter']);
+    $jobs = getJobs(3, $_SESSION['counter']);
     foreach ($jobs as $job) {
         $id = $job['job'];
         $jType = getJobType($job['job'])[0];

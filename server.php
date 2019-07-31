@@ -106,7 +106,7 @@ if (isset($_POST['add_job'])){
     }
     if (count($errors) == 0){
         if (addJob($db, $_SESSION['username'], $type, $desc, $expdate)){
-            echo "GGGGG";
+            header("location: addjob.php?success=true");
         }else{
             array_push($errors, "Eroare la adaugare !!!");
         }

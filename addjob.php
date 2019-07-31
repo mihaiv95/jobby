@@ -20,6 +20,11 @@ if (!isset($_SESSION['username'])) {
     <body class="h-100">
 
         <div class="content-wrapper">
+            <?php if ((isset($_GET['success'])) && ($_GET['success'] == true)) : ?>
+                <div id="my-animation">
+                    <h6>Succes!</h6>
+                </div>
+            <?php endif?>
             <header>
                 <nav class="navbar bg-primary">
                     <a class="btn btn-lg btn-outline-warning" href="index.php">Acasa</a>
