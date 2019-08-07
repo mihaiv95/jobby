@@ -68,13 +68,20 @@ function printJobs(){
 //        echo "<p>Key: " . $key . ", Val: " . $val . "</p>";
 //    <a href="#" class="list-group-item list-group-item-action">Help</a>
     $colors = [1 => 'bg-success', 2=>'bg-primary', 3=>'bg-danger'];
+    date_default_timezone_set('Europe/Bucharest');
     $jobs = getJobs(3, $_SESSION['counter']);
     foreach ($jobs as $job) {
         $id = $job['job'];
-        $jType = getJobType($job['job'])[0];
+        $jType = getJobType($job['fk_type'])[0];
         $jName = $jType['name'];
+        $expDate = strtotime($job['exp_date']);
+        $diff = $expDate - time();
+        $diffDays = floor($diff/(60*60*24));
         $difficulty = $jType['difficulty'];
-        echo "<a href=\"\" value='$id' onclick=\"moreInfo(this.getAttribute('value')); return false;\" class=\"list-group-item list-group-item-action text-light " . $colors[$difficulty] . "\">$jName</a>";
+        echo "<a href=\"\" value='$id' onclick=\"moreInfo(this.getAttribute('value')); return false;\" class=\"list-group-item list-group-item-action text-light " . $colors[$difficulty] . "\">
+                <p>$jName</p>
+                <p>Expira in " . $diffDays . " zile</p>
+            </a>";
     }
 }
 
